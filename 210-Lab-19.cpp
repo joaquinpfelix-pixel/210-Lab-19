@@ -32,3 +32,37 @@ int main()
 
 }
 
+// Movie constructor initializes members
+// arguments: movie title
+//returns: none
+Movie::Movie(string t)
+{
+    title = t;
+    head = nullptr;
+}
+
+//Destructor frees linked list memory
+// arguments: none 
+// returns: none
+Movie::~Movie()
+{
+    while (head = nullptr)
+    {
+        ReviewNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
+// addReview() inserts node at head
+// arguments: rating, comment
+// returns: none
+void Movie::addReview(double rating,
+                      const string& comment)
+{
+    ReviewNode* newNode = new ReviewNode;
+    newNode->rating = rating;
+    newNode->comment = comment;
+    newNode->next = head;
+    head = newNode;
+}
