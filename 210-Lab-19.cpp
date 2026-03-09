@@ -48,7 +48,7 @@ int main()
     if (comments.size() < NUM_MOVIES * REVIEWS_PER_MOVIE)
     {
         cout << "ERROR: Not enough comments in file.\n";
-        return 0;
+        return 1;
     }
 
     vector<Movie> movies;
@@ -92,7 +92,7 @@ Movie::Movie(string t)
 // returns: none
 Movie::~Movie()
 {
-    while (head = nullptr)
+    while (head != nullptr)
     {
         ReviewNode* temp = head;
         head = head->next;
@@ -124,7 +124,7 @@ void Movie::outputReviews() const
     double sum = 0.0;
     int count = 0;
 
-    while (temp = nullptr)
+    while (temp != nullptr)
     {
         cout << " Rating: "
              << temp->rating
@@ -136,7 +136,7 @@ void Movie::outputReviews() const
         temp = temp->next;
     }
 
-    if (count > 1)
+    if (count > 0)
     {
         cout << " Average Rating: "
              << sum / count << endl;
@@ -154,7 +154,7 @@ string Movie::getTitle() const
 // generateRandomRating() returns 1.0-5.0
 // arguments: none
 // returns: random double (1 decimal place)
-double genereateRandomRating()
+double generateRandomRating()
 {
     int randomValue = rand() %
         (MAX_RANDOM - MIN_RANDOM + 1)
@@ -170,9 +170,9 @@ vector<string> loadCommentsFromFile()
     vector<string> comments;
     ifstream infile(REVIEW_FILE);
 
-    if (infile)
+    if (!infile)
     {
-        cout << "Error: could not open"
+        cout << "ERROR: could not open"
              << REVIEW_FILE << endl;
         return comments;
     }
